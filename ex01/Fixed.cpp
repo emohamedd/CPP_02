@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:05:17 by emohamed          #+#    #+#             */
-/*   Updated: 2023/10/23 15:39:03 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:25:12 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,64 +35,11 @@ void Fpoint::setRawBits(int const raw)
     std::cout << "setRawBits member function called" << std::endl;
     this->fixed_point = raw;
 }
-
-void Fpoint::operator=(Fpoint const &point)
+int Fpoint::toInt(void) const
 {
-    std::cout << "Copy assignment operator called" << std::endl;
-    this->fixed_point = point.getRawBits();
-    // return (this->fixed_point);
+    return (this->fixed_point >> this->bits);
 }
-void Fpoint::operator+(Fpoint const &point)
+ Fpoint::Fpoint(const int point)
 {
-    std::cout << "Addition operator called" << std::endl;
-    this->fixed_point = this->fixed_point + point.getRawBits();
-    // return (this->fixed_point);
-}
-void Fpoint::operator-(Fpoint const &point)
-{
-    std::cout << "Subtraction operator called" << std::endl;
-    this->fixed_point = this->fixed_point - point.getRawBits();
-    // return (this->fixed_point);
-}
-void Fpoint::operator*(Fpoint const &point)
-{
-    std::cout << "Multiplication operator called" << std::endl;
-    this->fixed_point = this->fixed_point * point.getRawBits();
-    // return (this->fixed_point);
-}   
-void Fpoint::operator/(Fpoint const &point)
-{
-    std::cout << "Division operator called" << std::endl;
-    this->fixed_point = this->fixed_point / point.getRawBits();
-    // return (this->fixed_point);
-}
-bool Fpoint::operator>(Fpoint const &point)
-{
-    std::cout << "Greater than operator called" << std::endl;
-    return (this->fixed_point > point.getRawBits());
-}
-bool Fpoint::operator<(Fpoint const &point)
-{
-    std::cout << "Less than operator called" << std::endl;
-    return (this->fixed_point < point.getRawBits());
-}
-bool Fpoint::operator>=(Fpoint const &point)
-{
-    std::cout << "Greater than or equal to operator called" << std::endl;
-    return (this->fixed_point >= point.getRawBits());
-}
-bool Fpoint::operator<=(Fpoint const &point)
-{
-    std::cout << "Less than or equal to operator called" << std::endl;
-    return (this->fixed_point <= point.getRawBits());
-}
-bool Fpoint::operator==(Fpoint const &point)
-{
-    std::cout << "Equal to operator called" << std::endl;
-    return (this->fixed_point == point.getRawBits());
-}
-bool Fpoint::operator!=(Fpoint const &point)
-{
-    std::cout << "Not equal to operator called" << std::endl;
-    return (this->fixed_point != point.getRawBits());
+    this->fixed_point = point;
 }
