@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 10:51:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/10/27 11:56:03 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/27 12:34:32 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ private:
     static const int bits = 8;
 public:
     Fpoint();
-    // Fpoint(Fpoint point);
+    Fpoint(Fpoint const &point);
     Fpoint  (const int point);
     Fpoint  (const float point);
     ~Fpoint();
     int getRawBits(void) const;
     void setRawBits(int const raw);
+    void operator=(Fpoint const &point);
     float toFloat(void) const;
     int toInt(void) const;
 };
