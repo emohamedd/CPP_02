@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:05:17 by emohamed          #+#    #+#             */
-/*   Updated: 2023/10/28 17:29:13 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/28 18:21:16 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,10 @@ std::ostream& operator<<(std::ostream& os, const Fixed& point)
 }
 int Fixed::toInt(void) const
 {
-    int pow = std::pow(2, this->bits);
-    int res = this->fixed_point  / pow;
+    int res = this->fixed_point  / (1 << this->bits);
     return (res);
 }
 float Fixed::toFloat(void) const{
-     int pow = std::pow(2, this->bits);
-    float res = float(this->fixed_point) / pow;
+    float res = float(this->fixed_point) / (1 << this->bits);
      return (res);
 }
