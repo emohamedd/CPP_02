@@ -1,6 +1,6 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = Fpoint
+NAME = Fixed
 SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:.cpp=.o)
 

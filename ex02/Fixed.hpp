@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 10:51:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/10/28 16:39:12 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/28 17:29:13 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,48 +17,48 @@
 #include <cmath>
 #include <string>
 
-class Fpoint{       
+class Fixed{       
 private:
     int fixed_point;
     static const int bits = 8;
 public:
     //constructors
-    Fpoint();
-    Fpoint(Fpoint const &point);
-    Fpoint  (const int point);
-    Fpoint  (const float point);
-    ~Fpoint();
+    Fixed();
+    Fixed(Fixed const &point);
+    Fixed  (const int point);
+    Fixed  (const float point);
+    ~Fixed();
     //methods
     int getRawBits(void) const;
     void setRawBits(int const raw);
     float toFloat(void) const;
     int toInt(void) const;
     //static methods
-    static Fpoint& min(Fpoint &a, Fpoint &b);
-    static const Fpoint& min(const Fpoint &a, const Fpoint &b);
-    static Fpoint & max(Fpoint &a, Fpoint &b);
-    static const Fpoint& max(const Fpoint &a, const Fpoint &b);
+    static Fixed& min(Fixed &a, Fixed &b);
+    static const Fixed& min(const Fixed &a, const Fixed &b);
+    static Fixed & max(Fixed &a, Fixed &b);
+    static const Fixed& max(const Fixed &a, const Fixed &b);
     //assignment operators
-    void operator=(Fpoint const &point);
+    void operator=(Fixed const &point);
     //arithmetic operators
-    Fpoint operator+(Fpoint const &point);
-    Fpoint operator-(Fpoint const &point);
-    Fpoint operator*(Fpoint const &point);
-    Fpoint operator/(Fpoint const &point);
+    Fixed operator+(Fixed const &point);
+    Fixed operator-(Fixed const &point);
+    Fixed operator*(Fixed const &point);
+    Fixed operator/(Fixed const &point);
     //comparison operators
-    bool operator>(Fpoint const &point);
-    bool operator<(Fpoint const &point);
-    bool operator>=(Fpoint const &point);
-    bool operator<=(Fpoint const &point);
-    bool operator==(Fpoint const &point);
-    bool operator!=(Fpoint const &point);
+    bool operator>(Fixed const &point);
+    bool operator<(Fixed const &point);
+    bool operator>=(Fixed const &point);
+    bool operator<=(Fixed const &point);
+    bool operator==(Fixed const &point);
+    bool operator!=(Fixed const &point);
     //increment operators
-    Fpoint& operator++();
-    Fpoint& operator--();
-    Fpoint operator++(int);
-    Fpoint operator--(int);
+    Fixed& operator++();
+    Fixed& operator--();
+    Fixed operator++(int);
+    Fixed operator--(int);
     
 };
     //stream operators
-    std::ostream& operator<<(std::ostream& os, const Fpoint& point);
+    std::ostream& operator<<(std::ostream& os, const Fixed& point);
 #endif
