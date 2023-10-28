@@ -6,41 +6,60 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:05:17 by emohamed          #+#    #+#             */
-/*   Updated: 2023/10/28 12:52:48 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/28 17:28:16 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
 Fpoint::Fpoint(){
-    std::cout << "Default constructor called" << std::endl;
     this->fixed_point = 0;
 }
 
 Fpoint::Fpoint(Fpoint const &point)
 {
-    std::cout << "Copy constructor called" << std::endl;
     Fpoint::operator = (point);
 }
 void Fpoint::operator=(Fpoint const &point)
 {
-    std::cout << "Copy assignment operator called" << std::endl;
     this->fixed_point = point.getRawBits();
 }
 Fpoint::Fpoint(const int point)
 {
-    std::cout << "Int constructor called" << std::endl;
     int conv = point * (1 << this->bits);
     this->fixed_point  = conv;
 }
 Fpoint::Fpoint(const float point)
 {
-    std::cout << "Float constructor called" << std::endl;
     int conv = roundf(point * (1 << this->bits));
     this->fixed_point  = conv;
-} 
+}
+ Fpoint& Fpoint::min(Fpoint &a, Fpoint &b)
+{
+    if (a.getRawBits() < b.getRawBits())
+        return (a);
+    return (b);
+}
+ const Fpoint& Fpoint::min(const Fpoint &a, const Fpoint &b)
+{
+    if (a.getRawBits() < b.getRawBits())
+        return (a);
+    return (b);
+}
+ Fpoint& Fpoint::max(Fpoint &a, Fpoint &b)
+{
+    if (a.getRawBits() > b.getRawBits())
+        return (a);
+    return (b);
+}
+const Fpoint& Fpoint::max(const Fpoint &a, const Fpoint &b)
+{
+    if (a.getRawBits() > b.getRawBits())
+        return (a);
+    return (b);
+}
+
 Fpoint::~Fpoint(){
-    std::cout << "Destructor called" << std::endl;
 }
 int Fpoint::getRawBits() const{
     return (this->fixed_point);
@@ -64,57 +83,71 @@ float Fpoint::toFloat(void) const{
 
 Fpoint Fpoint::operator+(Fpoint const &point)
 {
-    std::cout << "Addition operator called" << std::endl;
     this->fixed_point = this->fixed_point + point.getRawBits();
     return (this->fixed_point);
 }
 Fpoint Fpoint::operator-(Fpoint const &point)
 {
-    std::cout << "Subtraction operator called" << std::endl;
     this->fixed_point = this->fixed_point - point.getRawBits();
     return (this->fixed_point);
 }
 Fpoint Fpoint::operator*(Fpoint const &point)
 {
-    std::cout << "Multiplication operator called" << std::endl;
-    this->fixed_point = this->fixed_point * point.getRawBits();
-    return (this->fixed_point);
+    // Fpoint no = (*this);
+    
+    this->fixed_point = (this->fixed_point * point.fixed_point) / (1 << this->bits);
+    return (*this);
 }   
 Fpoint Fpoint::operator/(Fpoint const &point)
 {
-    std::cout << "Division operator called" << std::endl;
-    this->fixed_point = this->fixed_point / point.getRawBits();
-    return (this->fixed_point);
+    this->fixed_point = (this->fixed_point / point.getRawBits()) * (1 << this->bits);
+    return (*this);
 }
 bool Fpoint::operator>(Fpoint const &point)
 {
-    std::cout << "Greater than operator called" << std::endl;
     return (this->fixed_point > point.getRawBits());
 }
 bool Fpoint::operator<(Fpoint const &point)
 {
-    std::cout << "Less than operator called" << std::endl;
     return (this->fixed_point < point.getRawBits());
 }
 bool Fpoint::operator>=(Fpoint const &point)
 {
-    std::cout << "Greater than or equal to operator called" << std::endl;
     return !(this->fixed_point < point.getRawBits());
 }
 bool Fpoint::operator<=(Fpoint const &point)
 {
-    std::cout << "Less than or equal to operator called" << std::endl;
     return !(this->fixed_point > point.getRawBits());
 }
 bool Fpoint::operator==(Fpoint const &point)
 {
-    std::cout << "Equal to operator called" << std::endl;
     return (this->fixed_point == point.getRawBits());
 }
 bool Fpoint::operator!=(Fpoint const &point)
 {
-    std::cout << "Not equal to operator called" << std::endl;
     return (this->fixed_point != point.getRawBits());
+}
+Fpoint& Fpoint::operator++()
+{
+    this->fixed_point++;
+    return (*this);
+}
+Fpoint& Fpoint::operator--()
+{
+    this->fixed_point--;
+    return (*this);
+}
+Fpoint Fpoint::operator++(int)
+{
+    Fpoint tmp = *this;
+    operator++();
+    return (tmp);
+}
+Fpoint Fpoint::operator--(int)
+{
+    Fpoint tmp = *this;
+    operator--();
+    return (tmp);
 }
 std::ostream& operator<<(std::ostream& os, const Fpoint& point)
 {

@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 10:51:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/10/28 12:50:27 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/28 16:39:12 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <cmath>
 #include <string>
 
-class Fpoint{
+class Fpoint{       
 private:
     int fixed_point;
     static const int bits = 8;
@@ -36,7 +36,7 @@ public:
     //static methods
     static Fpoint& min(Fpoint &a, Fpoint &b);
     static const Fpoint& min(const Fpoint &a, const Fpoint &b);
-    static Fpoint& max(Fpoint &a, Fpoint &b);
+    static Fpoint & max(Fpoint &a, Fpoint &b);
     static const Fpoint& max(const Fpoint &a, const Fpoint &b);
     //assignment operators
     void operator=(Fpoint const &point);
@@ -52,7 +52,13 @@ public:
     bool operator<=(Fpoint const &point);
     bool operator==(Fpoint const &point);
     bool operator!=(Fpoint const &point);
+    //increment operators
+    Fpoint& operator++();
+    Fpoint& operator--();
+    Fpoint operator++(int);
+    Fpoint operator--(int);
     
 };
+    //stream operators
     std::ostream& operator<<(std::ostream& os, const Fpoint& point);
 #endif
