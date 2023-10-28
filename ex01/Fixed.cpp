@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:05:17 by emohamed          #+#    #+#             */
-/*   Updated: 2023/10/27 12:42:34 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/28 12:45:35 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,17 @@ void Fpoint::operator=(Fpoint const &point)
 Fpoint::Fpoint(const int point)
 {
     std::cout << "Int constructor called" << std::endl;
-    int conv = point * (1 << this->bits);
-    this->fixed_point  = conv;
+    this->fixed_point = point * (1 << this->bits);
+    // this->fixed_point  = conv;
+}
+int Fpoint::get_fixed_point(void) const
+{
+    return (this->fixed_point);
 }
 Fpoint::Fpoint(const float point)
 {
     std::cout << "Float constructor called" << std::endl;
-    int conv = roundf(point * (1 << this->bits));
-    this->fixed_point  = conv;
+    this->fixed_point = roundf(point * (1 << this->bits));
 } 
 Fpoint::~Fpoint(){
     std::cout << "Destructor called" << std::endl;
@@ -50,6 +53,11 @@ void Fpoint::setRawBits(int const raw)
 {
     std::cout << "setRawBits member function called" << std::endl;
     this->fixed_point = raw;
+}
+std::ostream& operator<<(std::ostream& os, const Fpoint& point)
+{
+    os << point.toFloat();
+    return (os);
 }
 int Fpoint::toInt(void) const
 {

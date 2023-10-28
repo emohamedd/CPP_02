@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 10:51:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/10/27 12:34:32 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/28 12:37:59 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ public:
     Fpoint  (const float point);
     ~Fpoint();
     int getRawBits(void) const;
+    int get_fixed_point(void) const;
     void setRawBits(int const raw);
     void operator=(Fpoint const &point);
     float toFloat(void) const;
     int toInt(void) const;
 };
+    std::ostream& operator<<(std::ostream& os, const Fpoint& point);
 #endif
